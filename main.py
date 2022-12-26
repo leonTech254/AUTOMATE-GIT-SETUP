@@ -6,28 +6,33 @@ class Store:
     email = ''
 
 
-def SetupQuestion():
-    email = input("Enter your github email ")
-    email2 = input("Confirm your github email ")
-    if email == email2:
-        Store.email = email
-    else:
-        print("Email does not match")
-        SetupQuestion()
+class gitAutomate:
+    def __init__(self):
+        pass
+
+    def SetupQuestion(self):
+        email = input("Enter your github email ")
+        email2 = input("Confirm your github email ")
+        if email == email2:
+            Store.email = email
+            self.Key(email)
+        else:
+            print("Email does not match")
+            self.SetupQuestion()
+
+    # Adding your SSH key to the ssh-agent
+
+    def Key(self, email):
+        gen = os.popen(f"ssh-keygen -t ed25519 -C {email}").read()
+        subprocess.Popen(["ssh-keyge", "-t", "ed25519", "-C",
+                         f"{email}"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        print(gen)
+
+    def LocateKey():
+        # subprocess.run(["cat", "~/.ssh/id_ed25519.pub"])
+        AvNet = os.popen("cat ~/.ssh/id_ed25519.pub").read()
+        print(AvNet)
 
 
-# SetupQuestion()
-# Adding your SSH key to the ssh-agent
-
-
-def Key():
-    os.popen(f"ssh-keygen -t ed25519 -C {Store.email}").read()
-
-
-def LocateKey():
-    # subprocess.run(["cat", "~/.ssh/id_ed25519.pub"])
-    AvNet = os.popen("cat ~/.ssh/id_ed25519.pub").read()
-    print(AvNet)
-
-
-LocateKey()
+# LocateKey()
+gitAutomate().SetupQuestion()
