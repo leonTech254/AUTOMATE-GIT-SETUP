@@ -23,10 +23,8 @@ class gitAutomate:
     # Adding your SSH key to the ssh-agent
 
     def Key(self, email):
-        gen = os.popen(f"ssh-keygen -t ed25519 -C {email}").read()
-        subprocess.Popen(["ssh-keyge", "-t", "ed25519", "-C",
+        subprocess.Popen(["ssh-keygen", "-t", "ed25519", "-C",
                          f"{email}"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        print(gen)
 
     def LocateKey():
         # subprocess.run(["cat", "~/.ssh/id_ed25519.pub"])
